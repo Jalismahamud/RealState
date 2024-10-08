@@ -5,10 +5,9 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> eb939a3 (8 octobar 2024)
+
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -22,14 +21,12 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-<<<<<<< HEAD
-=======
 
         $this->call(AminitiesSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(PropertyTypeSeeder::class);
         $this->call(UserSeeder::class);
 
->>>>>>> eb939a3 (8 octobar 2024)
+
     }
 }

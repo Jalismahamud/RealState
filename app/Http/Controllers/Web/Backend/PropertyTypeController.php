@@ -3,26 +3,15 @@
 namespace App\Http\Controllers\Web\Backend;
 
 use App\Http\Controllers\Controller;
-<<<<<<< HEAD
-use Illuminate\Http\Request;
-
-class PropertyTypeController extends Controller
-{
-    public function index(){
-        return view('backend.layouts.property-type.index');
-    }
-
-    public function create(){
-        return view('backend.layouts.property-type.create');
-    }
 
 
-
-=======
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\PropertyType;
 use Exception;
+
+
+
 
 class PropertyTypeController extends Controller
 {
@@ -104,5 +93,5 @@ class PropertyTypeController extends Controller
             return redirect()->route('property-types.index')->with('error', 'Failed to delete Property Type');
         }
     }
->>>>>>> eb939a3 (8 octobar 2024)
+
 }

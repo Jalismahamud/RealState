@@ -1,27 +1,6 @@
-{{-- <h1>Create Category</h1>
-
-<form action="{{ route('categories.store') }}" method="POST">
-    @csrf
-
-
-    <label for="name">name:</label>
-    <input type="text" id="name" name="name" value="{{ old('name') }}" required>
-
-    <button type="submit">Save</button>
-</form>
-
-@if ($errors->any())
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    @endif
-</ul> --}}
-
-
 @extends('backend.app')
 
-@section('title', 'Category')
+@section('title', 'Aminities')
 
 @push('styles')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
@@ -71,15 +50,29 @@
     </div>
     {{-- PAGE-HEADER --}}
 
-    <form action="{{ route('categories.store') }}" method="POST">
-        @csrf
-    
-    
-        <label for="name">name:</label>
-        <input type="text" id="name" name="name" value="{{ old('name') }}" required>
-    
-        <button type="submit">Save</button>
-    </form>
+    <a href="{{ route('aminities.create') }}" class="btn btn-primary mb-3">Add Aminities</a>
+
+    <div class="row">
+        <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+            <div class="card box-shadow-0">
+                <div class="card-body">
+                    {{-- category code --}}
+                    @if (session('success'))
+                        <p>{{ session('success') }}</p>
+                    @endif
+
+                    <table id="aminities-table" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('scripts')
@@ -87,11 +80,11 @@
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#categories-table').DataTable({
+            $('#aminities-table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('categories.index') }}", // Ensure the route name matches your route for fetching categories
+                    url: "{{ route('aminities.index') }}", // Ensure the route name matches your route for fetching aminities
                     type: 'GET',
                 },
                 columns: [
@@ -100,8 +93,8 @@
                         data: null,
                         render: function(data, type, row) {
                             return `
-                                <a href="{{ route('categories.edit', '') }}/${row.id}" class="btn btn-sm btn-warning">Edit</a>
-                                <form action="{{ route('categories.destroy', '') }}/${row.id}" method="POST" style="display:inline;">
+                                <a href="{{ route('aminities.edit', '') }}/${row.id}" class="btn btn-sm btn-warning">Edit</a>
+                                <form action="{{ route('aminities.destroy', '') }}/${row.id}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger">Delete</button>

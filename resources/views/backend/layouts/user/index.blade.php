@@ -54,7 +54,7 @@
             <div class="card box-shadow-0">
                 <div class="card-body">
                     {{-- Page contant here --}}
-                  <P>HEKKIKSD</P>
+                  <P>Users</P>
 
                   <table class="table">
                     <thead>
@@ -86,7 +86,7 @@
 @endsection
 
 @push('scripts')
-    <script>
+    {{-- <script>
         // Add new mission item
         document.getElementById('add-mission-item').addEventListener('click', function() {
             const itemIndex = document.querySelectorAll('.mission-item').length;
@@ -161,6 +161,49 @@
             $('#image').on('dropify.afterClear', function(event, element) {
                 $('input[name="remove_image"]').val('1');
                 $(element.element).dropify('resetPreview');
+            });
+        });
+
+
+
+     
+
+
+
+    </script> --}}
+
+    <script>
+        $(document).ready(function() {
+            $('#users-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "{{ route('users.index') }}", // Ensure the route name matches your route for fetching users
+                    type: 'GET',
+                },
+                columns: [
+                    { 
+                        [data: 'name', name: 'name' ],
+                        [data: 'email', name: 'email' ],
+                        [data: 'role', name: 'role' ],
+
+                    },
+                    {
+                        data: null,
+                        render: function(data, type, row) {
+                            return `
+                                <a href="{{ route('users.index', '') }}/${row.id}" class="btn btn-sm btn-warning">Edit</a>
+                                <form action="{{ route('users.index', '') }}/${row.id}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                </form>
+                            `;
+                        },
+                        orderable: false,
+                        searchable: false
+                    },
+                ]
             });
         });
     </script>

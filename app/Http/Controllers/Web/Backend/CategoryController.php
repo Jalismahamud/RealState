@@ -5,17 +5,22 @@ namespace App\Http\Controllers\Web\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
-<<<<<<< HEAD
-=======
 use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\Facades\DataTables;
+
 use Exception;
->>>>>>> eb939a3 (8 octobar 2024)
+
 
 class CategoryController extends Controller
 {
     public function index()
     {
         $categories = Category::all();
+
+        if(request()->ajax()){
+            return DataTables::eloquent(Category::query())->make(true);
+        }
+
         return view('backend.layouts.category.index', compact('categories'));
     }
 
@@ -26,13 +31,13 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-<<<<<<< HEAD
+
         $request->validate([
             'title' => 'required|string|max:255',
         ]);
 
         Category::create($request->only('title'));
-=======
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
         ]);
@@ -53,7 +58,7 @@ class CategoryController extends Controller
 
             return redirect()->route('categories.index')->with('error', 'Failed to create Category.');
         }
->>>>>>> eb939a3 (8 octobar 2024)
+
 
         return redirect()->route('categories.index')
             ->with('success', 'Category created successfully.');
@@ -67,7 +72,7 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id)
     {
-<<<<<<< HEAD
+
         $request->validate([
             'title' => 'required|string|max:255',
         ]);
@@ -77,7 +82,7 @@ class CategoryController extends Controller
 
         return redirect()->route('categories.index')
             ->with('success', 'Category updated successfully.');
-=======
+
         $validator = validator($request->all(), [
             'name' => 'required|string|max:255',
         ]);
@@ -99,18 +104,18 @@ class CategoryController extends Controller
 
             return redirect()->route('categories.index')->with('error', 'Failed to update Category.');
         }
->>>>>>> eb939a3 (8 octobar 2024)
+
     }
 
     public function destroy($id)
     {
-<<<<<<< HEAD
+
         $category = Category::findOrFail($id);
         $category->delete();
 
         return redirect()->route('categories.index')
             ->with('success', 'Category deleted successfully.');
-=======
+
 
         try {
             $category = Category::findOrFail($id);
@@ -121,6 +126,6 @@ class CategoryController extends Controller
 
             return redirect()->route('categories.index')->with('error', 'Failed to delete Category.');
         }
->>>>>>> eb939a3 (8 octobar 2024)
+
     }
 }

@@ -36,11 +36,10 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/nasrat.php'));
-<<<<<<< HEAD
-=======
+
             Route::middleware('web')
                 ->group(base_path('routes/backend.php'));
->>>>>>> eb939a3 (8 octobar 2024)
+
         });
     }
 

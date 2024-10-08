@@ -7,11 +7,17 @@ use Illuminate\Http\Request;
 use App\Models\Aminities;
 use Illuminate\Support\Facades\Validator;
 use Exception;
+use Yajra\DataTables\Facades\DataTables;
 
 class AminitiesController extends Controller
 {
+
     public function index(){
         $aminities = Aminities::all();
+        if(request()->ajax()){
+            return DataTables::eloquent(Aminities::query())->make(true);
+        }
+
         return view('backend.layouts.aminities.index',compact('aminities'));
     }
 

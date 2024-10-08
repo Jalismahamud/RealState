@@ -4,7 +4,7 @@ use App\Http\Controllers\Web\Backend\AminitiesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Backend\CategoryController;
 use App\Http\Controllers\Web\Backend\PropertyTypeController;
-
+use App\Http\Controllers\Web\Backend\Settings\GeneralSettingsController;
 
 
 //Category Routes
@@ -41,5 +41,14 @@ Route::controller(AminitiesController::class)->group(function (){
     Route::delete('aminities/{id}','destroy')->name('aminities.destroy');
 });
 
+
+
+
+// Settings Routes
+Route::controller(GeneralSettingsController::class)->group(function(){
+    Route::get('settings','index')->name('settings.index');
+    Route::put('settings','createOrUpdate')->name('settings.update');
+
+});
 
 
